@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\FallbackController;
 use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Routing\Router;
+
 
 use function PHPUnit\Framework\returnSelf;
 
@@ -37,12 +40,15 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 //GET
-Route::get('/blog', [App\Http\Controllers\PostController::class, 'index']);
+// Route::get('/blog', [App\Http\Controllers\PostController::class, 'index']);
 
 // Route::get('/article/{id?}', [App\Http\Controllers\PostController::class, 'show']);
 
 
 // Route::get('/blog/{id}', [App\Http\Controllers\PostController::class, 'show'])->whereNumber('id');
+
+// Route::get('/article', [App\Http\Controllers\PostController::class, 'index'])->name('blog.index');
+// Route::get('/blog/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('blog.show');
 
 // Route::get('/blog/{id}', [App\Http\Controllers\PostController::class, 'show'])
 //     ->where('id', '[0-9]+');
@@ -59,31 +65,63 @@ Route::get('/blog', [App\Http\Controllers\PostController::class, 'index']);
 //         'name' => '[A-Za-z]+'
 //     ]);
 
-Route::get('/blog/{id}/{name}', [App\Http\Controllers\PostController::class, 'show'])
-    ->whereNumber('id')
-    ->whereAlpha('name');
+// Route::get('/blog/{id}/{name}', [App\Http\Controllers\PostController::class, 'show'])
+//     ->whereNumber('id')
+//     ->whereAlpha('name');
 
 
 //POST
-Route::get('/blog/create', [App\Http\Controllers\PostController::class, 'create']);
+// Route::get('/blog/create', [App\Http\Controllers\PostController::class, 'create']);
+// Route::get('/blog/create', [App\Http\Controllers\PostController::class, 'create'])->name('blog.create');
+// Route::get('/blog/{id}', [App\Http\Controllers\PostController::class, 'store'])->name('blog.store');
 
-Route::get('/blog', [App\Http\Controllers\PostController::class, 'store']);
+// // Route::get('/blog', [App\Http\Controllers\PostController::class, 'store']);
 
-//PUT OR PATCH
-Route::get('/blog/edit/{id}', [App\Http\Controllers\PostController::class, 'create']);
+// //PUT OR PATCH
+// Route::get('/blog/edit/{id}', [App\Http\Controllers\PostController::class, 'edit'])->name('blog.edit');
 
-Route::patch('/blog/{id}', [App\Http\Controllers\PostController::class, 'update']);
+// Route::patch('/blog/{id}', [App\Http\Controllers\PostController::class, 'update'])->name('blog.update');
 
-//DELETE
-Route::patch('/blog/{id}', [App\Http\Controllers\PostController::class, 'destroy']);
+// //DELETE
+// Route::delete('/blog/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->name('blog.destroy');
 
-// Router for invoke method
-Route::delete('/blog/{id}', [App\Http\Controllers\PostController::class, '__invoke']);
+Route::resource('blog', PostController::class);
+
+// Route::prefix('/blog')->group(function(){
+//     Route::get('/', [App\Http\Controllers\PostController::class, 'index'])->name('blog.index');
+//     Route::get('/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('blog.show');
+
+//     Route::get('/create', [App\Http\Controllers\PostController::class, 'create'])->name('blog.create');
+//     Route::get('/', [App\Http\Controllers\PostController::class, 'store'])->name('blog.store');
+
+//     Route::get('/edit/{id}', [App\Http\Controllers\PostController::class, 'edit'])->name('blog.edit');
+//     Route::patch('/{id}', [App\Http\Controllers\PostController::class, 'update'])->name('blog.update');
+
+//     Route::delete('/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->name('blog.destroy');
+
+// });
+
+
+// // Router for invoke method
+// Route::delete('/blog/{id}', [App\Http\Controllers\PostController::class, '__invoke']);
 
 // Multipple HTTP verbs
 // Route::match(['GET', 'POST'], '/blog', [PostController::class,'index']);
 // Route::any('/blog', [PostController::class, 'index']);
 
-// Return Vie w 
-Route::view('/blog', 'blog.index', ['name' => 'Code with ABC']);
+// Return View 
+// Route::view('/blog', 'blog.index', ['name' => 'Code with ABC']);
 
+// Falback Route
+Route::fallback(FallbackController::class);
+
+
+
+// ...
+
+// $router = new Router;
+
+// Set a default action to be performed when no matching routes are found
+// $router->fallback(function() {
+//     return response('404 | The Page Not Found', 404);
+// });
