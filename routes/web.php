@@ -109,7 +109,7 @@ Route::resource('blog', PostController::class);
 // Route::match(['GET', 'POST'], '/blog', [PostController::class,'index']);
 // Route::any('/blog', [PostController::class, 'index']);
 
-// Return View 
+// Return View
 // Route::view('/blog', 'blog.index', ['name' => 'Code with ABC']);
 
 // Falback Route
@@ -125,3 +125,5 @@ Route::fallback(FallbackController::class);
 // $router->fallback(function() {
 //     return response('404 | The Page Not Found', 404);
 // });
+
+

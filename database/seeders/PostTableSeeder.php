@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Post;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,14 +14,29 @@ class PostTableSeeder extends Seeder
      * @return voidP
      */
     public function run()
-     {
-            $posts = [
-                'title' => 'Post 1',
-                'excerpt' => 'Post 1',
-                'body' => 'Post 1',
-                'min_to_read' => 'Post 1',
-                'image_path' => '',
-                'is_published' => 'Post 1',
-        ]
+    {
+        $posts = [
+            [
+
+                'title' => 'Post One',
+                'excerpt' => 'Summary of Post One',
+                'body' => 'Body of Post One',
+                'image_path' => 'Empty',
+                'is_published' => false,
+                'min_to_read' => 2,
+            ],
+            [
+                'title' => 'Post Two',
+                'excerpt' => 'Summary of Post Two',
+                'body' => 'Body of Post Two',
+                'image_path' => 'Empty',
+                'is_published' => false,
+                'min_to_read' => 2,
+            ]
+        ];
+
+        foreach($posts as $key => $value){
+            Post::create($value);
+        }
     }
 }
