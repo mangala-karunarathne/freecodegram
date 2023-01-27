@@ -27,7 +27,7 @@ Route::get('/home', function () {
     return view('home');
 });
 
-Auth::routes();
+// Auth::routes();
 
 // Route::get('/home', [App\Http\Controllers\ProfilesController::class, 'index'])->name('home');
 Route::get('/profile/{user}', [App\Http\Controllers\ProfilesController::class, 'index'])->name('profile.show');
@@ -85,11 +85,14 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // //DELETE
 // Route::delete('/blog/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->name('blog.destroy');
 
-Route::resource('blog', PostController::class);
+// Route::resource('/blog', [App\Http\Controllers\PostController::class, 'index']);
 
-// Route::prefix('/blog')->group(function(){
-//     Route::get('/', [App\Http\Controllers\PostController::class, 'index'])->name('blog.index');
-//     Route::get('/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('blog.show');
+//     Route::get('/', [App\Http\Controllers\PostController::class, 'store'])->name('blog.store');
+
+Route::prefix('/blog')->group(function(){
+    Route::get('/', [App\Http\Controllers\PostController::class, 'index'])->name('blog.index');
+    // Route::get('/show', [App\Http\Controllers\PostController::class, 'show'])->name('blog.show');
+    Route::get('/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('blog.show');
 
 //     Route::get('/create', [App\Http\Controllers\PostController::class, 'create'])->name('blog.create');
 //     Route::get('/', [App\Http\Controllers\PostController::class, 'store'])->name('blog.store');
@@ -99,7 +102,7 @@ Route::resource('blog', PostController::class);
 
 //     Route::delete('/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->name('blog.destroy');
 
-// });
+});
 
 
 // // Router for invoke method
@@ -113,7 +116,7 @@ Route::resource('blog', PostController::class);
 // Route::view('/blog', 'blog.index', ['name' => 'Code with ABC']);
 
 // Falback Route
-Route::fallback(FallbackController::class);
+// Route::fallback(FallbackController::class);
 
 
 

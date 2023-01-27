@@ -6,4 +6,4 @@
 <!-- <a href="{{ route('blog.index')}}" >Blog</a> -->
 
 
-<a href="{{ route('blog.show', ['id' => 1])}}" >Blog</a>
+{{-- <a href="{{ route('blog.show', ['id' => 1])}}" >Blog</a> --}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -13,6 +14,7 @@ class PostController extends Controller
      */
     public function index()
     {
+        // $posts = DB::statement('SELECT * FROM posts');
       return view('blog.index');
     }
 
@@ -84,7 +86,7 @@ class PostController extends Controller
 
     public function __invoke()
     {
-        // 
+        //
     }
-  
+
 }
