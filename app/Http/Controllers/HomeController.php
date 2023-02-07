@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -24,8 +27,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data = DB::table('profiles',)->get();
-        // dd($data);
+        $data = DB::table('profiles')->get();
+        // $data = Profile::with('user')->first();
+        // $user = User::all();
+
+        // dd($user);
         return view('home')->with('data', $data);
     }
 }
